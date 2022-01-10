@@ -22,14 +22,39 @@ class LinkedList {
       this.tail.next = newNode;
       this.tail = newNode;
     }
-    this.length++
+    this.length++;
+  }
+
+  pop() {
+    if (!this.head) {
+      return undefined;
+    }
+    const poppedNode = this.tail;
+    let prevNode = this.head;
+    while (prevNode.next && prevNode.next !== poppedNode) {
+      prevNode = prevNode.next;
+    }
+    this.tail = prevNode;
+    prevNode.next = null;
+    this.length--;
+    if (this.length === 0) {
+      this.head = null;
+      this.tail = null;
+    }
+    return poppedNode;
   }
 }
 
-const myLinkedList = new LinkedList(4);
+const myLinkedList = new LinkedList(1);
 
 console.log("NEW", myLinkedList);
 
-myLinkedList.push(77);
+myLinkedList.push(2);
+myLinkedList.push(3);
 
-console.log("PUSH", myLinkedList);
+console.log("PUSH TWO", myLinkedList);
+
+console.log("POPPED", myLinkedList.pop());
+console.log("POPPED", myLinkedList.pop());
+console.log("POPPED", myLinkedList.pop());
+console.log("AFTER POP", myLinkedList);
