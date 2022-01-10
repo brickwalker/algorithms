@@ -43,18 +43,45 @@ class LinkedList {
     }
     return poppedNode;
   }
+
+  unshift(value) {
+    const newNode = new Node(value);
+    const next = this.head;
+    this.head = newNode;
+    if (!this.tail) {
+      this.tail = newNode;
+    }
+    newNode.next = next;
+    this.length++;
+    return this;
+  }
+
+  shift() {
+    if (!this.head) {
+      return undefined;
+    }
+    const shiftedNode = this.head;
+    if (this.length === 1) {
+      this.tail = null;
+    }
+    this.head = this.head.next;
+    this.length--;
+    return shiftedNode;
+  }
 }
 
 const myLinkedList = new LinkedList(1);
 
-console.log("NEW", myLinkedList);
+myLinkedList.pop();
 
-myLinkedList.push(2);
-myLinkedList.push(3);
+console.log("SHIFTED", myLinkedList.shift());
+console.log("LL", myLinkedList);
+console.log("UNSHIFT", myLinkedList.unshift(2));
+console.log("SHIFTED", myLinkedList.shift());
+console.log("LL", myLinkedList);
+console.log("UNSHIFT", myLinkedList.unshift(3));
+console.log("UNSHIFT", myLinkedList.unshift(4));
+console.log("UNSHIFT", myLinkedList.unshift(5));
+console.log("SHIFTED", myLinkedList.shift());
+console.log("LL", myLinkedList);
 
-console.log("PUSH TWO", myLinkedList);
-
-console.log("POPPED", myLinkedList.pop());
-console.log("POPPED", myLinkedList.pop());
-console.log("POPPED", myLinkedList.pop());
-console.log("AFTER POP", myLinkedList);
