@@ -61,10 +61,11 @@ class LinkedList {
       return undefined;
     }
     const shiftedNode = this.head;
+    this.head = this.head.next;
+    shiftedNode.next = null;
     if (this.length === 1) {
       this.tail = null;
     }
-    this.head = this.head.next;
     this.length--;
     return shiftedNode;
   }
