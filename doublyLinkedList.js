@@ -97,13 +97,20 @@ class DoublyLinkedList {
 
     return node;
   }
+
+  set (index, value){
+    const node = this.get(index);
+    if (node) {
+      node.value = value;
+    }
+    return node;
+  }
 }
 
 const dLinkList = new DoublyLinkedList(1);
 dLinkList.push(2);
 dLinkList.push(3);
-dLinkList.push(4);
 console.log(dLinkList);
-console.log("GET", dLinkList.get(30));
-console.log("GET", dLinkList.get(0));
-console.log("GET", dLinkList.get(2));
+console.log("SET", dLinkList.set(1, 22));
+console.log("SET", dLinkList.set(10, 22));
+console.log(dLinkList);
