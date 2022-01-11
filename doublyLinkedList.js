@@ -70,17 +70,40 @@ class DoublyLinkedList {
       this.head.prev = null;
       temp.next = null;
     }
-    this.length--
+    this.length--;
     return temp;
+  }
+
+  get(index) {
+    if (index < 0 || index >= this.length) {
+      return undefined;
+    } else if (index === 0) {
+      return this.head;
+    } else if (index === this.length - 1) {
+      return this.tail;
+    }
+    let node;
+    if (index < this.length / 2) {
+      node = this.head;
+      for (let i = 0; i < index; i++) {
+        node = node.next;
+      }
+    } else {
+      node = this.tail;
+      for (let i = this.length - 1; i > index; i--) {
+        node = node.prev;
+      }
+    }
+
+    return node;
   }
 }
 
 const dLinkList = new DoublyLinkedList(1);
 dLinkList.push(2);
+dLinkList.push(3);
+dLinkList.push(4);
 console.log(dLinkList);
-console.log("SHIFT", dLinkList.shift());
-console.log(dLinkList);
-console.log("SHIFT", dLinkList.shift());
-console.log(dLinkList);
-console.log("SHIFT", dLinkList.shift());
-console.log(dLinkList);
+console.log("GET", dLinkList.get(30));
+console.log("GET", dLinkList.get(0));
+console.log("GET", dLinkList.get(2));
