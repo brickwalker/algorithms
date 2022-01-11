@@ -105,12 +105,32 @@ class DoublyLinkedList {
     }
     return node;
   }
+
+  insert(index, value){
+    if (index < 0 || index > this.length) {
+      return false;
+    } else if (index === 0) {
+      this.unshift(value);
+    } else if (index === this.length) {
+      this.push(value)
+    } else {
+      const newNode = new DoublyNode(value);
+      const after = this.get(index);
+      const before = after.prev;
+      newNode.next = after;
+      newNode.prev = before;
+      before.next = newNode;
+      after.prev = newNode;
+      this.length++
+    }
+    return true;
+  }
 }
 
-const dLinkList = new DoublyLinkedList(1);
-dLinkList.push(2);
-dLinkList.push(3);
+const dLinkList = new DoublyLinkedList(10);
+console.log(dLinkList.insert(0, 5));
+console.log(dLinkList.insert(2, 15));
 console.log(dLinkList);
-console.log("SET", dLinkList.set(1, 22));
-console.log("SET", dLinkList.set(10, 22));
+console.log(dLinkList.insert(22, 15));
+console.log(dLinkList.insert(1, 7));
 console.log(dLinkList);
