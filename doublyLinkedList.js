@@ -43,11 +43,24 @@ class DoublyLinkedList {
     this.length--;
     return temp;
   }
+
+  unshift(value) {
+    const node = new DoublyNode(value);
+    if (!this.tail) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      node.next = this.head;
+      this.head.prev = node;
+      this.head = node;
+    }
+    this.length++;
+    return this;
+  }
 }
 
 const dLinkList = new DoublyLinkedList(1);
-dLinkList.push(2);
-console.log(dLinkList.pop());
-console.log(dLinkList.pop());
-console.log(dLinkList.pop());
-console.log(dLinkList);
+dLinkList.pop();
+console.log(dLinkList.unshift(1));
+console.log(dLinkList.unshift(2));
+console.log(dLinkList.unshift(3));
