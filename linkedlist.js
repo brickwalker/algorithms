@@ -121,19 +121,50 @@ class LinkedList {
     }
     return true;
   }
+
+  remove(index) {
+    if (index < 0 || index >= this.length) {
+      return false;
+    } else if (index === 0) {
+      this.shift();
+    } else if (index === this.length - 1) {
+      this.pop()
+    } else {
+      const prev = this.getByIndex(index - 1);
+      const curr = prev.next;
+      prev.next = curr.next;
+      curr.next = null;
+      this.length--
+    }
+    return true;
+  }
+
+  reverse() {
+    const temp = this.head;
+    this.head = this.tail;
+    this.tail = temp;
+    let prev = null;
+    let next = temp.next;
+    for (let i = 0; i < this.length; i++) {
+      next = temp.next;
+      temp.next = prev;
+      prev = temp;
+      temp = next;
+    }
+    return this
+  }
 }
 
 const myLinkedList = new LinkedList(1);
-myLinkedList.pop()
+myLinkedList.push(2)
+myLinkedList.push(3)
 
-console.log("INSERT INTO EMPTY", myLinkedList.insert(0, 11));
 console.log("LIST", myLinkedList);
-
-console.log("INSERT OUT OF BOUND", myLinkedList.insert(99, 11));
+console.log("REMOVE", myLinkedList.remove(1));
 console.log("LIST", myLinkedList);
-
-console.log("INSERT", myLinkedList.insert(1, 13));
+console.log("REMOVE", myLinkedList.remove(0));
 console.log("LIST", myLinkedList);
-
-console.log("INSERT", myLinkedList.insert(1, 12));
+console.log("REMOVE", myLinkedList.remove(0));
+console.log("LIST", myLinkedList);
+console.log("REMOVE", myLinkedList.remove(0));
 console.log("LIST", myLinkedList);
