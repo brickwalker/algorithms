@@ -98,7 +98,7 @@ class DoublyLinkedList {
     return node;
   }
 
-  set (index, value){
+  set(index, value) {
     const node = this.get(index);
     if (node) {
       node.value = value;
@@ -106,13 +106,13 @@ class DoublyLinkedList {
     return node;
   }
 
-  insert(index, value){
+  insert(index, value) {
     if (index < 0 || index > this.length) {
       return false;
     } else if (index === 0) {
       this.unshift(value);
     } else if (index === this.length) {
-      this.push(value)
+      this.push(value);
     } else {
       const newNode = new DoublyNode(value);
       const after = this.get(index);
@@ -121,16 +121,38 @@ class DoublyLinkedList {
       newNode.prev = before;
       before.next = newNode;
       after.prev = newNode;
-      this.length++
+      this.length++;
     }
     return true;
   }
+
+  remove(index) {
+    if (index === 0) {
+      return this.shift();
+    } else if (index === this.length - 1) {
+      return this.pop();
+    }
+    const node = this.get(index);
+    if (node) {
+      const prev = node.prev;
+      const next = node.next;
+      node.prev.next = next;
+      node.prev = null;
+      next.prev = prev;
+      node.next = null;
+      this.length--;
+    }
+    return node;
+  }
 }
 
-const dLinkList = new DoublyLinkedList(10);
-console.log(dLinkList.insert(0, 5));
-console.log(dLinkList.insert(2, 15));
-console.log(dLinkList);
-console.log(dLinkList.insert(22, 15));
-console.log(dLinkList.insert(1, 7));
+const dLinkList = new DoublyLinkedList(1);
+dLinkList.push(2);
+dLinkList.push(3);
+
+console.log(dLinkList.remove(15));
+console.log(dLinkList.remove(1));
+console.log(dLinkList.remove(1));
+console.log(dLinkList.remove(0));
+console.log(dLinkList.remove(0));
 console.log(dLinkList);
