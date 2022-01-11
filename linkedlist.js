@@ -104,20 +104,36 @@ class LinkedList {
     }
     return false;
   }
+
+  insert(index, value) {
+    if (index < 0 || index > this.length) {
+      return false;
+    } else if (index === this.length) {
+      this.push(value);
+    } else if (index === 0) {
+      this.unshift(value)
+    } else {
+      const node = new Node(value);
+      const prev = this.getByIndex(index - 1);
+      node.next = prev.next;
+      prev.next = node;
+      this.length++
+    }
+    return true;
+  }
 }
 
 const myLinkedList = new LinkedList(1);
 myLinkedList.pop()
 
-console.log("GET NON-EXISTENT", myLinkedList.get(11));
+console.log("INSERT INTO EMPTY", myLinkedList.insert(0, 11));
+console.log("LIST", myLinkedList);
 
-myLinkedList.push(2);
-myLinkedList.push(11);
-myLinkedList.push(3);
+console.log("INSERT OUT OF BOUND", myLinkedList.insert(99, 11));
+console.log("LIST", myLinkedList);
 
-console.log("GET", myLinkedList.get(11));
-console.log("GET by Index OOB", myLinkedList.getByIndex(11));
-console.log("GET by Index", myLinkedList.getByIndex(1));
+console.log("INSERT", myLinkedList.insert(1, 13));
+console.log("LIST", myLinkedList);
 
-console.log("SET", myLinkedList.set(2, 33));
-console.log("MY LIST", myLinkedList);
+console.log("INSERT", myLinkedList.insert(1, 12));
+console.log("LIST", myLinkedList);
