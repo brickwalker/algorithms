@@ -69,20 +69,45 @@ class LinkedList {
     this.length--;
     return shiftedNode;
   }
+
+  get(value) {
+    if (!this.head) {
+      return undefined;
+    } else {
+      let pointer = this.head;
+      while(pointer.value !== value) {
+        pointer = pointer.next;
+        if (pointer === null) {
+          return undefined;
+        }
+      }
+      return pointer;
+    }
+  }
+
+  getByIndex(index) {
+    if (index < 0 || index >= this.length) {
+      return undefined;
+    }
+    let temp = this.head;
+    for(let i = 0; i < index; i++) {
+      temp = temp.next;
+    }
+    return temp;
+  }
 }
 
 const myLinkedList = new LinkedList(1);
+myLinkedList.pop()
 
-myLinkedList.pop();
+console.log("GET NON-EXISTENT", myLinkedList.get(11));
 
-console.log("SHIFTED", myLinkedList.shift());
-console.log("LL", myLinkedList);
-console.log("UNSHIFT", myLinkedList.unshift(2));
-console.log("SHIFTED", myLinkedList.shift());
-console.log("LL", myLinkedList);
-console.log("UNSHIFT", myLinkedList.unshift(3));
-console.log("UNSHIFT", myLinkedList.unshift(4));
-console.log("UNSHIFT", myLinkedList.unshift(5));
-console.log("SHIFTED", myLinkedList.shift());
-console.log("LL", myLinkedList);
+myLinkedList.push(2);
+myLinkedList.push(11);
+myLinkedList.push(3);
+
+console.log("GET", myLinkedList.get(11));
+console.log("GET by Index OOB", myLinkedList.getByIndex(11));
+console.log("GET by Index", myLinkedList.getByIndex(1));
+
 
