@@ -57,10 +57,30 @@ class DoublyLinkedList {
     this.length++;
     return this;
   }
+
+  shift() {
+    const temp = this.head;
+    if (!this.head) {
+      return undefined;
+    } else if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.head = this.head.next;
+      this.head.prev = null;
+      temp.next = null;
+    }
+    this.length--
+    return temp;
+  }
 }
 
 const dLinkList = new DoublyLinkedList(1);
-dLinkList.pop();
-console.log(dLinkList.unshift(1));
-console.log(dLinkList.unshift(2));
-console.log(dLinkList.unshift(3));
+dLinkList.push(2);
+console.log(dLinkList);
+console.log("SHIFT", dLinkList.shift());
+console.log(dLinkList);
+console.log("SHIFT", dLinkList.shift());
+console.log(dLinkList);
+console.log("SHIFT", dLinkList.shift());
+console.log(dLinkList);
