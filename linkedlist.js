@@ -95,6 +95,15 @@ class LinkedList {
     }
     return temp;
   }
+
+  set(index, value) {
+    const node = this.getByIndex(index);
+    if (node) {
+      node.value = value;
+      return true;
+    }
+    return false;
+  }
 }
 
 const myLinkedList = new LinkedList(1);
@@ -110,4 +119,5 @@ console.log("GET", myLinkedList.get(11));
 console.log("GET by Index OOB", myLinkedList.getByIndex(11));
 console.log("GET by Index", myLinkedList.getByIndex(1));
 
-
+console.log("SET", myLinkedList.set(2, 33));
+console.log("MY LIST", myLinkedList);
