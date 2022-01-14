@@ -54,28 +54,41 @@ class BST {
     return false;
   }
 
-  minValueNode(currentNode){
+  minValueNode(currentNode) {
     while (currentNode.left) {
-        currentNode = currentNode.left;
+      currentNode = currentNode.left;
     }
     return currentNode;
+  }
+
+  BFS() {
+    const currentNode = this.root;
+    const queue = [];
+    const results = [];
+    queue.push(currentNode);
+
+    while (queue.length) {
+      const currentNode = queue.shift();
+      results.push(currentNode.value);
+      if (currentNode.left) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right) {
+        queue.push(currentNode.right);
+      }
+    }
+    return results;
   }
 }
 
 myBst = new BST();
 
-myBst.insert(10);
-myBst.insert(5);
-myBst.insert(15);
-myBst.insert(14);
-myBst.insert(16);
+myBst.insert(47);
+myBst.insert(21);
+myBst.insert(76);
+myBst.insert(18);
+myBst.insert(27);
+myBst.insert(52);
+myBst.insert(82);
 
-console.log(JSON.stringify(myBst, null, 4));
-console.log(myBst.insert(16));
-console.log(myBst.constains(10));
-console.log(myBst.constains(16));
-console.log(myBst.constains(15));
-console.log(myBst.constains(777));
-console.log(myBst.minValueNode(myBst.root));
-console.log(myBst.minValueNode(myBst.root.right));
-console.log(myBst.minValueNode(myBst.root.left));
+console.log(myBst.BFS());
