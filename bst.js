@@ -94,6 +94,21 @@ class BST {
     traverse(this.root);
     return results;
   }
+
+  DFSPostOrder() {
+    const results = [];
+    function traverse(node) {
+      if (node.left) {
+        traverse(node.left);
+      }
+      if (node.right) {
+        traverse(node.right);
+      }
+      results.push(node.value);
+    }
+    traverse(this.root);
+    return results;
+  }
 }
 
 myBst = new BST();
@@ -106,4 +121,4 @@ myBst.insert(27);
 myBst.insert(52);
 myBst.insert(82);
 
-console.log(myBst.DFSPreOrder());
+console.log(myBst.DFSPostOrder());
