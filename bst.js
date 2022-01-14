@@ -79,6 +79,21 @@ class BST {
     }
     return results;
   }
+
+  DFSPreOrder() {
+    const results = [];
+    function traverse(node) {
+      results.push(node.value);
+      if (node.left) {
+        traverse(node.left);
+      }
+      if (node.right) {
+        traverse(node.right);
+      }
+    }
+    traverse(this.root);
+    return results;
+  }
 }
 
 myBst = new BST();
@@ -91,4 +106,4 @@ myBst.insert(27);
 myBst.insert(52);
 myBst.insert(82);
 
-console.log(myBst.BFS());
+console.log(myBst.DFSPreOrder());
